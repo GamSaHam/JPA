@@ -1,0 +1,17 @@
+spring:
+    datasource:
+      username: root
+      password: mysql
+      url: jdbc:mysql://localhost:3306/jpa_db?useSSL=false&serverTimezone=UTC
+      driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
+
+
+
+
+
+

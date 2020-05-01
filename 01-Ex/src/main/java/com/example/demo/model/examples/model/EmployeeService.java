@@ -1,38 +1,34 @@
 package com.example.demo.model.examples.model;
 
-import org.hibernate.Session;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.Collection;
 
-@Service
+
 public class EmployeeService {
+    protected EntityManager em;
 
-    private Session session;
-
-    public void setSession(Session session) {
-        this.session = session;
+    public EmployeeService(EntityManager em) {
+        this.em = em;
     }
 
     public Employee createEmployee(int id, String name, long salary) {
         Employee emp = new Employee(id);
         emp.setName(name);
         emp.setSalary(salary);
-        session.persist(emp);
+        em.persist(emp);
         return emp;
     }
 
     public void removeEmployee(int id) {
         Employee emp = findEmployee(id);
         if (emp != null) {
-            session.remove(emp);
+            em.remove(emp);
         }
     }
 
     public Employee raiseEmployeeSalary(int id, long raise) {
-        Employee emp = session.find(Employee.class, id);
+        Employee emp = em.find(Employee.class, id);
         if (emp != null) {
             emp.setSalary(emp.getSalary() + raise);
         }
@@ -40,11 +36,11 @@ public class EmployeeService {
     }
 
     public Employee findEmployee(int id) {
-        return session.find(Employee.class, id);
+        return em.find(Employee.class, id);
     }
 
     public Collection<Employee> findAllEmployees() {
-        TypedQuery query = session.createQuery("SELECT e FROM Employee e", Employee.class);
+        TypedQuery query = em.createQuery("SELECT e FROM Employee e", Employee.class);
         return query.getResultList();
     }
 }
