@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain;
+package com.example.demo.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,7 +11,8 @@ import java.util.List;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
 

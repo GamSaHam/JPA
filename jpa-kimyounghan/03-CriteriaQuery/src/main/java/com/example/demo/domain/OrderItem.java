@@ -1,6 +1,7 @@
-package jpabook.jpashop.domain;
+package com.example.demo.domain;
 
-import jpabook.jpashop.domain.item.Item;
+import com.example.demo.domain.item.Item;
+import com.example.demo.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Table(name = "ORDER_ITEM")
 public class OrderItem {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
@@ -27,7 +29,7 @@ public class OrderItem {
     private int count;      //주문 수량
 
     //==생성 메서드==//
-    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) throws NotEnoughStockException {
 
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);

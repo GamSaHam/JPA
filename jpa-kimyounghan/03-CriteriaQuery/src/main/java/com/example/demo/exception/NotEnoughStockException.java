@@ -1,11 +1,11 @@
-package jpabook.jpashop.exception;
+package com.example.demo.exception;
 
 /**
  * 재고 부족 예외
  * @author holyeye
  */
 @SuppressWarnings("serial")
-public class NotEnoughStockException extends RuntimeException {
+public class NotEnoughStockException extends Throwable {
 
     public NotEnoughStockException() {
     }
