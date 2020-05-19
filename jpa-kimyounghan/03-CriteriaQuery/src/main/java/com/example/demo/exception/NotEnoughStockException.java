@@ -11,7 +11,7 @@ public class NotEnoughStockException extends Throwable {
     }
 
     public NotEnoughStockException(String message) {
-        super(message);
+        super( message);
     }
 
     public NotEnoughStockException(String message, Throwable cause) {

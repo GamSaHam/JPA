@@ -1,5 +1,8 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,8 @@ import java.util.List;
  */
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 
     @Id
@@ -18,12 +23,13 @@ public class Member {
 
     private String name;
 
+    private Long age;
+
     @Embedded
     private Address address;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<Order>();
-
 
     public Long getId() {
         return id;
