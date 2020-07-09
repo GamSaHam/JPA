@@ -2,25 +2,30 @@ package com.example.demo;
 
 import com.example.demo.domain.Address;
 import com.example.demo.domain.Member;
-
-import org.junit.jupiter.api.Test;
+import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.Tuple;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class DemoApplicationTests {
+public class DemoApplicationTest extends TestCase {
 
     @Autowired
     EntityManager em;
 
     @Test
     public void addMember() {
-        
+
 
         Member member = new Member();
         member.setName("홍길동");
@@ -36,13 +41,13 @@ class DemoApplicationTests {
         em.getTransaction().commit();
 
 
-        
+
     }
 
     @Test
     public void printCriteriaBuilder() {
 
-        
+
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
@@ -56,13 +61,13 @@ class DemoApplicationTests {
 
         System.out.println(resultList);
 
-        
+
 
     }
 
     @Test
     public void printQTypedQuery() {
-        
+
 
         TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
 
@@ -72,30 +77,30 @@ class DemoApplicationTests {
         }
 
 
-        
+
     }
 
     @Test
     public void printQuery(){
-        
+
 
         Query query = em.createQuery("select m.name, m.address from Member m");
 
         List resultList = query.getResultList();
 
         for(Object o : resultList){
-           Object[] result = (Object[]) o;
+            Object[] result = (Object[]) o;
             System.out.println("name" + result[0]);
             System.out.println("address" + result[1]);
         }
 
-        
+
     }
 
 
     @Test
     public void parameterBindingTest(){
-        
+
 
 
         TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
@@ -106,8 +111,8 @@ class DemoApplicationTests {
 
         resultList.stream().forEach(member -> System.out.println(member));
 
-        
-        
+
+
     }
 
 
@@ -118,7 +123,7 @@ class DemoApplicationTests {
 
     @Test
     public void joinTest(){
-        
+
 
         // LEFT JOIN
         // RIGHT JOIN
@@ -132,7 +137,7 @@ class DemoApplicationTests {
 
         System.out.println(members);
 
-        
+
     }
 
     //  AND OR NOT
@@ -145,14 +150,14 @@ class DemoApplicationTests {
     // IS [NOT] EMPTY
     @Test
     public void collectionStatementTest(){
-        
+
         TypedQuery<Member> query = em.createQuery("select m from Member m where m.orders is not empty ", Member.class);
 
         List<Member> resultList = query.getResultList();
 
         System.out.println(resultList);
 
-        
+
     }
 
     // 문자 함수
@@ -167,7 +172,7 @@ class DemoApplicationTests {
     @Test
     public void caseExampleTest(){
 
-        
+
         Query query = em.createQuery("select case when m.name = '홍길동' then '홍길동 맞음' else '다른사람' end from Member m");
 
         List resultList = query.getResultList();
@@ -184,7 +189,7 @@ class DemoApplicationTests {
     @Test
     public void criteriaQueryTest(){
 
-        
+
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
@@ -197,7 +202,7 @@ class DemoApplicationTests {
         List<Member> members = query.getResultList();
 
         System.out.println(members);
-        
+
     }
 
     @Test
@@ -373,11 +378,4 @@ class DemoApplicationTests {
 
     }
 
-
-
-
-
 }
-
-
-

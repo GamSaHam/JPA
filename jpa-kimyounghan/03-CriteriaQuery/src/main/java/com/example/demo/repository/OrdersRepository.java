@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class OredersRepository {
+public class OrdersRepository {
 
     @PersistenceContext
     EntityManager em;
