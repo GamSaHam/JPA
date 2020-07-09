@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.domain.Address;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.OrderRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +47,37 @@ public class DemoApplicationTest extends TestCase {
 
 
     }
+
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Test
+    public void addOrder(){
+
+        Member member = memberRepository.findById(2L).get();
+
+        com.example.demo.domain.Order order = new com.example.demo.domain.Order();
+
+        order.setPrice(1000D);
+
+        order.setMember(member);
+
+
+        com.example.demo.domain.Order order2 = new com.example.demo.domain.Order();
+
+        order2.setPrice(2000D);
+
+        order2.setMember(member);
+
+        orderRepository.save(order);
+        orderRepository.save(order2);
+
+
+
+
+    }
+
 
     @Test
     public void printCriteriaBuilder() {
@@ -380,5 +412,20 @@ public class DemoApplicationTest extends TestCase {
 
 
     }
+
+    @Test
+    public void printTotPrice(){
+
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery cq = cb.createQuery(Double.class);
+//
+//        Root<Member> root = cq.from(Member.class);
+//
+//        Join<Member, com.example.demo.domain.Order> join = cq.j
+//
+
+
+    }
+
 
 }
