@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.domain.Address;
 import com.example.demo.domain.Member;
+import com.example.demo.repository.MemberRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class DemoApplicationTest extends TestCase {
     @Autowired
     EntityManager em;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @Test
     public void addMember() {
 
@@ -36,9 +40,8 @@ public class DemoApplicationTest extends TestCase {
         address.setCity("서울");
 
         member.setAddress(address);
-        em.getTransaction().begin();
-        em.persist(member);
-        em.getTransaction().commit();
+
+        memberRepository.save(member);
 
 
 
